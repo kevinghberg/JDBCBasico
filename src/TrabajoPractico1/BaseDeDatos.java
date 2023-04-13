@@ -1,6 +1,5 @@
 package TrabajoPractico1;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,15 +25,19 @@ public class BaseDeDatos {
 		String uri = "jdbc:derby:MyDerby;create=true";
 		Connection conn = DriverManager.getConnection(uri);
 		
-		String sql = "INSERT INTO Persona (nombre, edad) VALUES (?, ?)";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setString(1, "Juan");
-		stmt.setInt(2, 30);
-		stmt.executeUpdate();
 		
-		String sql2 = "SELECT * FROM Persona";
-		Statement stmt2 = conn.createStatement();
-		ResultSet rs = stmt2.executeQuery(sql2);
+		// insert
+		String insert = "INSERT INTO Persona (nombre, edad) VALUES (?, ?)";
+		PreparedStatement stm = conn.prepareStatement(insert);
+		stm.setString(1, "Juan");
+		stm.setInt(2, 30);
+		stm.executeUpdate();
+		
+		
+		//select
+		String select = "SELECT * FROM Persona";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(select);
 		while (rs.next()) {
 		    String nombre = rs.getString("nombre");
 		    int edad = rs.getInt("edad");
